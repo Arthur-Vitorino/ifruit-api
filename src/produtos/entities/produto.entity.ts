@@ -21,7 +21,7 @@ export class Produto {
     dataValidade: Date;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
+    criadoEm: Date;
 
     @ManyToOne(() => Categoria, (categoria) => categoria.produtos, {
 nullable: false})

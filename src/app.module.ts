@@ -4,6 +4,10 @@ import { ProdutosModule } from './produtos/produtos.module';
 import { CategoriasModule } from './categorias/categorias.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { CarrinhoModule } from './carrinho/carrinho.module';
+import { ItemCarrinhoModule } from './item-carrinho/item-carrinho.module';
+import { PedidosModule } from './pedidos/pedidos.module';
+import { ItemPedidoModule } from './item-pedido/item-pedido.module';
 
 @Module({
   imports: [
@@ -16,7 +20,11 @@ import { AuthModule } from './auth/auth.module';
     ProdutosModule,
     CategoriasModule,
     UserModule,
-    AuthModule
+    AuthModule,
+    CarrinhoModule,
+    ItemCarrinhoModule,
+    PedidosModule,
+    ItemPedidoModule
   ],
 })
 export class AppModule {}

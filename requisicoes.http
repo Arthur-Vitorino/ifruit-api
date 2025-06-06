@@ -73,10 +73,11 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-  "nomeUsuario": "diego2",
-  "nome": "Diego Rod2",
-  "senha": "123456",
-  "email": "diego2@mail.com"
+  "nomeUsuario": "diego3",
+  "nome": "Diego Admin",
+  "senha": "admin123",
+  "email": "diego3@mail.com",
+  "role": "ADMIN"
 }
 
 ### Login de usuário
@@ -84,8 +85,8 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "nomeUsuario": "diego2",
-  "senha": "123456"
+  "nomeUsuario": "diego3",
+  "senha": "admin123"
 }
 
 
@@ -108,7 +109,7 @@ Content-Type: application/json
 ### Criar produto com token válido
 POST http://localhost:3000/produtos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28yIiwiaWF0IjoxNzQ4NDUzNTg1LCJleHAiOjE3NDg0NTcxODV9.4S60JKDaKTLW6fBe785TnoU5uGwWHNGUGMkRhvx5R5s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28zIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzQ5MTM3MDIwLCJleHAiOjE3NDkxNDA2MjB9.0XLpdIM54NH-csY7RZSYiwevQTYpgHbvTzpN2AU5xNI
 
 {
   "nome": "Produto 101",
@@ -131,3 +132,94 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc
 ### Deletar produto com token válido
 DELETE http://localhost:3000/produtos/1 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28iLCJpYXQiOjE3NDcyNDgxMjgsImV4cCI6MTc0NzI1MTcyOH0.hBkwTM5WYlkJ9Oh0WgyjRNGAWxncup4Kq2uYnaI0EUE
+
+
+
+### FLUXO 1: LOGIN ATÉ COMPRA DO PRODUTO
+
+### 1. Registro de Usuário
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "nomeUsuario": "diego3",
+  "nome": "Diego Admin",
+  "senha": "admin123",
+  "email": "diego3@mail.com",
+  "role": "ADMIN"
+}
+
+### 2. Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "nomeUsuario": "diego3",
+  "email": "diego3@mail.com",
+  "senha": "admin123"
+}
+
+### 3. Listar Produtos
+GET http://localhost:3000/produtos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28zIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzQ5MjEzNDU5LCJleHAiOjE3NDkyMTcwNTl9.HkbiBlg6t0gB-c0hF-F7Uwt0HN5AkHaVfrohXeK1Lbo
+
+### 4. Adicionar Produto ao Carrinho
+POST http://localhost:3000/carrinho/items
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28zIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzQ5MjEyMzY4LCJleHAiOjE3NDkyMTU5Njh9.kQsCPfIUdyVjTZi28Mu0fvAwE8emj3-FG9TkzKrtc-4
+
+{
+  "userId": 1,
+  "produtoId": 2,
+  "quantidade": 3
+}
+
+### 5. Ver Carrinho
+GET http://localhost:3000/carrinho/items
+Authorization: Bearer 
+
+### 6. Finalizar Compra
+POST http://localhost:3000/pedidos
+Authorization: Bearer 
+
+
+### FLUXO 2: USUÁRIO ALTERA INFORMAÇÕES DA CONTA
+
+### 1. Registro de Usuário
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "nomeUsuario": "diego3",
+  "nome": "Diego Admin",
+  "senha": "123456",
+  "email": "diego3@mail.com",
+  "role": "ADMIN"
+}
+
+### 2. Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "123456"
+}
+
+### 3. Atualizar dados
+PATCH http://localhost:3000/user/1
+Content-Type: application/json
+
+{
+  "nome": "Diego Atualizado",
+  "email": "diego@novoemail.com"
+}
+
+### 4. Atualizar senha
+PATCH http://localhost:3000/user/1/senha
+Content-Type: application/json
+
+{
+  "senhaAtual": "123456",
+  "novaSenha": "novaSenha123"
+}

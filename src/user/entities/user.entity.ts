@@ -33,8 +33,8 @@ export class User {
     @BeforeInsert()
     @BeforeUpdate()
     async hashPassword() {
-        if (this.senha){
-            this.senha = await bcrypt.hash(this.senha, 10);
+    if (this.senha && !this.senha.startsWith('$2b$')) {
+        this.senha = await bcrypt.hash(this.senha, 10);
         }
     }
 }

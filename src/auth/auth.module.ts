@@ -1,24 +1,23 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from 'src/user/entities/user.entity';
 import { AuthService } from './auth.service';
-import { PassportModule } from '@nestjs/passport';
+import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { UserModule } from 'src/user/user.module';
-import { RolesGuard } from './roles.guard';
-import { User } from 'src/user/entities/user.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
     UserModule,
-    PassportModule,
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User]), // <== Aqui você torna UserRepository disponível
     JwtModule.register({
-      secret: 'secretKey',
-      signOptions: { expiresIn: '1h'},
+      secret: 'secretKey', // ideal usar variável de ambiente
+      signOptions: { expiresIn: '1h' },
     }),
   ],
-  providers: [AuthService, JwtStrategy, RolesGuard],
-  exports: [AuthService, RolesGuard],
+  providers: [AuthService, JwtStrategy],
+  controllers: [AuthController],
+  exports: [AuthService],
 })
 export class AuthModule {}

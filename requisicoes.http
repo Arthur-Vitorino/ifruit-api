@@ -223,3 +223,33 @@ Content-Type: application/json
   "senhaAtual": "123456",
   "novaSenha": "novaSenha123"
 }
+
+
+### FLUXO 3: LOJISTA ADCIONA NOVO PRODUTO
+
+### Criar Produto (POST /produtos) - precisa de token com role MANAGER
+POST http://localhost:3000/produtos
+Content-Type: application/json
+Authorization: Bearer token
+
+{
+  "nome": "Produto Teste",
+  "preco": 9.99,
+  "emailEmpresa": "contato@empresa.com",
+  "dataValidade": "2025-12-31T00:00:00.000Z",
+  "categoriaId": 1
+}
+
+### Atualizar produto (PATCH /produtos/:id) - precisa de token com role MANAGER
+PATCH http://localhost:3000/produtos/1
+Content-Type: application/json
+Authorization: Bearer token
+
+{
+  "nome": "Produto Atualizado",
+  "preco": 7.50
+}
+
+### Deletar produto (DELETE /produtos/:id) - precisa de token com role ADMIN
+DELETE http://localhost:3000/produtos/1
+Authorization: Bearer token

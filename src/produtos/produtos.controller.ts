@@ -14,8 +14,9 @@ export class ProdutosController {
   @Post()
   @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Roles(UserRole.USER, UserRole.ADMIN)
-  create(@Body() createProdutoDto: CreateProdutoDto) {
-    return this.produtosService.create(createProdutoDto);
+  create(@Body() createProdutoDto: CreateProdutoDto, @Request() req) {
+    const userId = req.user.id;
+    return this.produtosService.create(createProdutoDto, userId);
   }
 
   @Get()

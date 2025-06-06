@@ -1,5 +1,6 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
+import { Produto } from "src/produtos/entities/produto.entity";
 
 export enum UserRole {
     USER = 'USER',
@@ -37,4 +38,7 @@ export class User {
         this.senha = await bcrypt.hash(this.senha, 10);
         }
     }
+
+    @OneToMany(() => Produto, produto => produto.lojista)
+    produtos: Produto[];
 }

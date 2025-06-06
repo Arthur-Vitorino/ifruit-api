@@ -109,7 +109,7 @@ Content-Type: application/json
 ### Criar produto com token válido
 POST http://localhost:3000/produtos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28zIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzQ5MTM3MDIwLCJleHAiOjE3NDkxNDA2MjB9.0XLpdIM54NH-csY7RZSYiwevQTYpgHbvTzpN2AU5xNI
+Authorization: Bearer token
 
 {
   "nome": "Produto 101",
@@ -122,7 +122,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc
 ### Editar produto com token válido
 PATCH http://localhost:3000/produtos/10 HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28iLCJpYXQiOjE3NDcyNDgxMjgsImV4cCI6MTc0NzI1MTcyOH0.hBkwTM5WYlkJ9Oh0WgyjRNGAWxncup4Kq2uYnaI0EUE
+Authorization: Bearer token
 
 {
   "nome": "Produto 88",
@@ -131,7 +131,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc
 
 ### Deletar produto com token válido
 DELETE http://localhost:3000/produtos/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28iLCJpYXQiOjE3NDcyNDgxMjgsImV4cCI6MTc0NzI1MTcyOH0.hBkwTM5WYlkJ9Oh0WgyjRNGAWxncup4Kq2uYnaI0EUE
+Authorization: Bearer token
 
 
 
@@ -161,12 +161,12 @@ Content-Type: application/json
 
 ### 3. Listar Produtos
 GET http://localhost:3000/produtos
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28zIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzQ5MjEzNDU5LCJleHAiOjE3NDkyMTcwNTl9.HkbiBlg6t0gB-c0hF-F7Uwt0HN5AkHaVfrohXeK1Lbo
+Authorization: Bearer token
 
 ### 4. Adicionar Produto ao Carrinho
 POST http://localhost:3000/carrinho/items
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiZGllZ28zIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzQ5MjEyMzY4LCJleHAiOjE3NDkyMTU5Njh9.kQsCPfIUdyVjTZi28Mu0fvAwE8emj3-FG9TkzKrtc-4
+Authorization: Bearer token
 
 {
   "userId": 1,

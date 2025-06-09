@@ -1,4 +1,4 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import * as bcrypt from 'bcrypt';
 import { Produto } from "src/produtos/entities/produto.entity";
 
@@ -41,4 +41,8 @@ export class User {
 
     @OneToMany(() => Produto, produto => produto.lojista)
     produtos: Produto[];
+
+    @ManyToMany(() => Produto, (produto) => produto.favoritadoPor, { cascade:true})
+    @JoinTable()
+    favoritos: Produto[];
 }

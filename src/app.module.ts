@@ -8,6 +8,7 @@ import { CarrinhoModule } from './carrinho/carrinho.module';
 import { ItemCarrinhoModule } from './item-carrinho/item-carrinho.module';
 import { PedidosModule } from './pedidos/pedidos.module';
 import { ItemPedidoModule } from './item-pedido/item-pedido.module';
+import { FavoritosModule } from './favoritos/favoritos.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { ItemPedidoModule } from './item-pedido/item-pedido.module';
     CarrinhoModule,
     ItemCarrinhoModule,
     PedidosModule,
-    ItemPedidoModule
+    ItemPedidoModule,
+    FavoritosModule
   ],
 })
 export class AppModule {}

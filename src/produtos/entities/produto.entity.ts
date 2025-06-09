@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Categoria } from 'src/categorias/entities/categoria.entity';
 import { User } from 'src/user/entities/user.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, ManyToMany } from 'typeorm';
 
 @Entity()
 export class Produto {
@@ -39,4 +39,6 @@ export class Produto {
     @Column()
     lojistaId: number;
     
+    @ManyToMany(() => User, (user) => user.favoritos)
+    favoritadoPor: User[];
 }

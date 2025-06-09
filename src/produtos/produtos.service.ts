@@ -92,4 +92,47 @@ async create(createProdutoDto: CreateProdutoDto, userId: number): Promise<Produt
       throw new NotFoundException(`Produto com id: ${id} não encontrado`);
     }
   }
+
+  async favoritarProduto(produtoId: number, userId: number): Promise<string> {
+  const user = await this.userRepository.findOne({
+    where: { id: userId },
+    relations: ['favoritos'],
+  });
+
+  if (!user) {
+    throw new NotFoundException('Usuário não encontrado');
+  }
+
+  const produto = await this.produtoRepository.findOne({
+    where: { id: produtoId },
+  });
+
+  if (!produto) {
+    throw new NotFoundException('Produto não encontrado');
+  }
+
+  const jaFavoritado = user.favoritos?.find((p) => p.id === produto.id);
+
+  if (jaFavoritado) {
+    user.favoritos = user.favoritos.filter((p) => p.id !== produto.id);
+    await this.userRepository.save(user);
+    return 'Produto removido dos favoritos';
+  } else {
+    user.favoritos = [...(user.favoritos || []), produto];
+    await this.userRepository.save(user);
+    return 'Produto adicionado aos favoritos';
+  }
+}
+async listarFavoritos(userId: number): Promise<Produto[]> {
+  const user = await this.userRepository.findOne({
+    where: { id: userId },
+    relations: ['favoritos'],
+  });
+
+  if (!user) {
+    throw new NotFoundException('Usuário não encontrado');
+  }
+
+  return user.favoritos;
+}
 }

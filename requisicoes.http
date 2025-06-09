@@ -253,3 +253,37 @@ Authorization: Bearer token
 ### Deletar produto (DELETE /produtos/:id) - precisa de token com role ADMIN
 DELETE http://localhost:3000/produtos/1
 Authorization: Bearer token
+
+
+### FLUXO 4: USUÁRIO FAVORITA PRODUTO
+
+### 1. Registro de Usuário
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "nomeUsuario": "diego3",
+  "nome": "Diego Admin",
+  "senha": "123456",
+  "email": "diego3@mail.com",
+  "role": "ADMIN"
+}
+
+### 2. Login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "123456"
+}
+
+# 3. Favoritar Produto
+POST http://localhost:3000/produtos/{id}/favoritar
+Authorization: Bearer
+Content-Type: application/json
+
+# 4. Listar favoritos
+GET http://localhost:3000/produtos/favoritos
+Authorization: Bearer
+Content-Type: application/json

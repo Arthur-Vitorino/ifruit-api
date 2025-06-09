@@ -43,4 +43,16 @@ export class ProdutosController {
   remove(@Param('id') id: string) {
     return this.produtosService.remove(+id);
   }
+
+  @Post(':id/favoritar')
+  @UseGuards(AuthGuard('jwt'))
+  favoritar(@Param('id') id: string, @Request() req) {
+    return this.produtosService.favoritarProduto(+id, req.user.id);
+  }
+
+  @Get('favoritos')
+  @UseGuards(AuthGuard('jwt'))
+  listarFavoritos(@Request() req) {
+    return this.produtosService.listarFavoritos(req.user.id)
+  }
 }

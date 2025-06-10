@@ -4,9 +4,9 @@
 API RESTful desenvolvida com [NestJS](https://nestjs.com/) para gerenciamento de um sistema de hortifruti. A aplicação permite o controle de produtos, categorias, usuários, autenticação com JWT, e gerenciamento de permissões por papéis (roles).
 
 ## Integrantes
-- Arthur Ribeiro Vitorino
+- Arthur Ribeiro Vitorino UC23100894
 - Ana Carolina
-- Débora Rezende
+- Débora Rezende Valeriano UC22201300
 - Anna Júlia Curcio
 
 ## 🚀 Tecnologias Utilizadas

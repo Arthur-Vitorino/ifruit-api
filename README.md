@@ -5,9 +5,9 @@ API RESTful desenvolvida com [NestJS](https://nestjs.com/) para gerenciamento de
 
 ## Integrantes
 - Arthur Ribeiro Vitorino UC23100894
-- Ana Carolina
+- Ana Carolina de Andrade Silva UC23100955
 - Débora Rezende Valeriano UC22201300
-- Anna Júlia Curcio
+- Anna Júlia Curcio Marques UC23100362
 
 ## 🚀 Tecnologias Utilizadas
 

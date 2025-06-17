@@ -13,7 +13,7 @@ export class ProdutosController {
 
   @Post()
   @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRole.USER, UserRole.ADMIN)
+  @Roles(UserRole.MANAGER, UserRole.ADMIN)
   create(@Body() createProdutoDto: CreateProdutoDto, @Request() req) {
     const userId = req.user.id;
     return this.produtosService.create(createProdutoDto, userId);
@@ -21,8 +21,8 @@ export class ProdutosController {
 
   @Get()
   findAll(@Request() req, @Query('categoria') categoria?: string) {
-    const categoriaId = categoria ? parseInt(categoria, 10) : null;
-    return this.produtosService.findAll();
+    const categoriaId = categoria ? parseInt(categoria, 10) : undefined;
+    return this.produtosService.findAll(categoriaId);
   }
 
   @Get(':id')
@@ -32,7 +32,7 @@ export class ProdutosController {
 
   @Patch(':id')
   @UseGuards(AuthGuard('jwt'), RolesGuard)
-  @Roles(UserRole.MANAGER)
+  @Roles(UserRole.MANAGER, UserRole.ADMIN)
   update(@Param('id') id: string, @Body() updateProdutoDto: UpdateProdutoDto) {
     return this.produtosService.update(+id, updateProdutoDto);
   }

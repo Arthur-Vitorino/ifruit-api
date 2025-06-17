@@ -6,7 +6,7 @@ import { CreateProdutoDto } from './dto/create-produto.dto';
 import { UpdateProdutoDto } from './dto/update-produto.dto';
 import { Produto } from './entities/produto.entity';
 import { Categoria } from 'src/categorias/entities/categoria.entity';
-import { User } from 'src/user/entities/user.entity';
+import { User, UserRole } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class ProdutosService {
@@ -34,7 +34,7 @@ async create(createProdutoDto: CreateProdutoDto, userId: number): Promise<Produt
   if (!lojista) {
     throw new NotFoundException(`Lojista com id ${userId} não encontrado`);
   }
-  if (lojista.role !== 'MANAGER') {
+  if (lojista.role !== UserRole.MANAGER) {
     throw new UnauthorizedException('Usuário não autorizado para cadastrar produtos');
   }
 
@@ -48,11 +48,14 @@ async create(createProdutoDto: CreateProdutoDto, userId: number): Promise<Produt
 }
 
 
-  async findAll(): Promise<Produto[]> {
-    return await this.produtoRepository.find({
-      relations: ['categoria', 'lojista'],
-    });
-  }
+  async findAll(categoriaId?: number): Promise<Produto[]> {
+  const whereClause = categoriaId ? { categoria: { id: categoriaId } } : {};
+  
+  return await this.produtoRepository.find({
+    where: whereClause,
+    relations: ['categoria', 'lojista'],
+  });
+}
 
   async findOne(id: number): Promise<Produto> {
     const produto = await this.produtoRepository.findOne({

@@ -1,289 +1,54 @@
-###
-### Produtos
-###
+### REALIZAR REGISTRO DE USUÁRIO
+POST http://localhost:3000/auth/register 
+Content-Type: application/json
 
-### Listar todos os produtos
-GET http://localhost:3000/produtos HTTP/1.1
+{
+  "nomeUsuario": "Arthur Manager",
+  "nome": "Arthur",
+  "senha": "arthurFez",
+  "email": "arthur.manager@gmail.com",
+  "role": "MANAGER"
+}
 
-### Listar produto específico por ID
-GET http://localhost:3000/produtos/1 HTTP/1.1
+### REALIZAR LOGIN 
+POST http://localhost:3000/auth/login 
+Content-Type: application/json
 
-### Criar novo produto
+{
+  "nomeUsuario": "Arthur Manager",
+  "senha": "arthurFez"
+}
+
+### INSERIR PRODUTO SEM TOKEN VALIDO (Err)
 POST http://localhost:3000/produtos HTTP/1.1
 Content-Type: application/json
 
 {
-  "nome": "string",
-  "preco": 10,
-  "emailEmpresa": "teste@mail.com",
-  "dataValidade": "2025-06-12"
+  "nome": "Produto 101",
+  "preco": 7.78,
+  "emailEmpresa": "mail@mail.com",
+  "dataValidade": "2025-06-14",
+  "categoria": 1
 }
 
-### Atualizar produto (parcial)
-PATCH http://localhost:3000/produtos/1 HTTP/1.1
-Content-Type: application/json
-
-{
-  "nome": "Produto dois",
-  "preco": 9
-}
-
-### Deletar produto
-DELETE http://localhost:3000/produtos/1 HTTP/1.1
-
-
-###
-### Categorias
-###
-
-### Listar todas as categorias
-GET http://localhost:3000/categorias HTTP/1.1
-
-### Listar categoria por ID
-GET http://localhost:3000/categorias/1 HTTP/1.1
-
-### Criar nova categoria
+### INSERIR CATEGORIA COM TOKEN VALIDO (Happy)
 POST http://localhost:3000/categorias HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiQXJ0aHVyIE1hbmFnZXIiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc1MDE3NDgwMywiZXhwIjoxNzUwMTc4NDAzfQ.d97iPQagzkNZLe78UmhTUBOOMae-4DsQNM5bxRZtlf0
 
 {
-  "nome": "Categoria 10",
-  "ativa": false
+  "nome": "categoria1"
 }
 
-### Atualizar categoria (parcial)
-PATCH http://localhost:3000/categorias/1 HTTP/1.1
-Content-Type: application/json
-
-{
-  "nome": "Categoria 7",
-  "ativa": true
-}
-
-### Deletar categoria
-DELETE http://localhost:3000/categorias/2 HTTP/1.1
-
-
-###
-### Autenticação
-###
-
-### Registro de usuário
-POST http://localhost:3000/auth/register
-Content-Type: application/json
-
-{
-  "nomeUsuario": "diego3",
-  "nome": "Diego Admin",
-  "senha": "admin123",
-  "email": "diego3@mail.com",
-  "role": "ADMIN"
-}
-
-### Login de usuário
-POST http://localhost:3000/auth/login
-Content-Type: application/json
-
-{
-  "nomeUsuario": "diego3",
-  "senha": "admin123"
-}
-
-
-###
-### Testes com token
-###
-
-### Criar produto sem token (esperado erro)
+### INSERIR PRODUTO COM TOKEN VALIDO (Happy)
 POST http://localhost:3000/produtos HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiQXJ0aHVyIE1hbmFnZXIiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc1MDE3NDgwMywiZXhwIjoxNzUwMTc4NDAzfQ.d97iPQagzkNZLe78UmhTUBOOMae-4DsQNM5bxRZtlf0
 
 {
   "nome": "Produto 101",
   "preco": 7.78,
   "emailEmpresa": "mail@mail.com",
   "dataValidade": "2025-06-14",
-  "categoria": 1
-}
-
-### Criar produto com token válido
-POST http://localhost:3000/produtos HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer token
-
-{
-  "nome": "Produto 101",
-  "preco": 7.78,
-  "emailEmpresa": "mail@mail.com",
-  "dataValidade": "2025-06-14",
-  "categoria": 1
-}
-
-### Editar produto com token válido
-PATCH http://localhost:3000/produtos/10 HTTP/1.1
-Content-Type: application/json
-Authorization: Bearer token
-
-{
-  "nome": "Produto 88",
-  "preco": 8.88
-}
-
-### Deletar produto com token válido
-DELETE http://localhost:3000/produtos/1 HTTP/1.1
-Authorization: Bearer token
-
-
-
-### FLUXO 1: LOGIN ATÉ COMPRA DO PRODUTO
-
-### 1. Registro de Usuário
-POST http://localhost:3000/auth/register
-Content-Type: application/json
-
-{
-  "nomeUsuario": "diego3",
-  "nome": "Diego Admin",
-  "senha": "admin123",
-  "email": "diego3@mail.com",
-  "role": "ADMIN"
-}
-
-### 2. Login
-POST http://localhost:3000/auth/login
-Content-Type: application/json
-
-{
-  "nomeUsuario": "diego3",
-  "email": "diego3@mail.com",
-  "senha": "admin123"
-}
-
-### 3. Listar Produtos
-GET http://localhost:3000/produtos
-Authorization: Bearer token
-
-### 4. Adicionar Produto ao Carrinho
-POST http://localhost:3000/carrinho/items
-Content-Type: application/json
-Authorization: Bearer token
-
-{
-  "userId": 1,
-  "produtoId": 2,
-  "quantidade": 3
-}
-
-### 5. Ver Carrinho
-GET http://localhost:3000/carrinho/items
-Authorization: Bearer 
-
-### 6. Finalizar Compra
-POST http://localhost:3000/pedidos
-Authorization: Bearer 
-
-
-### FLUXO 2: USUÁRIO ALTERA INFORMAÇÕES DA CONTA
-
-### 1. Registro de Usuário
-POST http://localhost:3000/auth/register
-Content-Type: application/json
-
-{
-  "nomeUsuario": "diego3",
-  "nome": "Diego Admin",
-  "senha": "123456",
-  "email": "diego3@mail.com",
-  "role": "ADMIN"
-}
-
-### 2. Login
-POST http://localhost:3000/auth/login
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "123456"
-}
-
-### 3. Atualizar dados
-PATCH http://localhost:3000/user/1
-Content-Type: application/json
-
-{
-  "nome": "Diego Atualizado",
-  "email": "diego@novoemail.com"
-}
-
-### 4. Atualizar senha
-PATCH http://localhost:3000/user/1/senha
-Content-Type: application/json
-
-{
-  "senhaAtual": "123456",
-  "novaSenha": "novaSenha123"
-}
-
-
-### FLUXO 3: LOJISTA ADCIONA NOVO PRODUTO
-
-### Criar Produto (POST /produtos) - precisa de token com role MANAGER
-POST http://localhost:3000/produtos
-Content-Type: application/json
-Authorization: Bearer token
-
-{
-  "nome": "Produto Teste",
-  "preco": 9.99,
-  "emailEmpresa": "contato@empresa.com",
-  "dataValidade": "2025-12-31T00:00:00.000Z",
   "categoriaId": 1
 }
-
-### Atualizar produto (PATCH /produtos/:id) - precisa de token com role MANAGER
-PATCH http://localhost:3000/produtos/1
-Content-Type: application/json
-Authorization: Bearer token
-
-{
-  "nome": "Produto Atualizado",
-  "preco": 7.50
-}
-
-### Deletar produto (DELETE /produtos/:id) - precisa de token com role ADMIN
-DELETE http://localhost:3000/produtos/1
-Authorization: Bearer token
-
-
-### FLUXO 4: USUÁRIO FAVORITA PRODUTO
-
-### 1. Registro de Usuário
-POST http://localhost:3000/auth/register
-Content-Type: application/json
-
-{
-  "nomeUsuario": "diego3",
-  "nome": "Diego Admin",
-  "senha": "123456",
-  "email": "diego3@mail.com",
-  "role": "ADMIN"
-}
-
-### 2. Login
-POST http://localhost:3000/auth/login
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "123456"
-}
-
-# 3. Favoritar Produto
-POST http://localhost:3000/produtos/{id}/favoritar
-Authorization: Bearer
-Content-Type: application/json
-
-# 4. Listar favoritos
-GET http://localhost:3000/produtos/favoritos
-Authorization: Bearer
-Content-Type: application/json

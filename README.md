@@ -9,6 +9,9 @@ API RESTful desenvolvida com [NestJS](https://nestjs.com/) para gerenciamento de
 - Débora Rezende Valeriano UC22201300
 - Anna Júlia Curcio Marques UC23100362
 
+## Link do Vídeo de Apresentação
+https://youtu.be/gU1cHXyod3M?si=RwnCw-LljvFRQydn
+
 ## 🚀 Tecnologias Utilizadas
 
 - [NestJS](https://nestjs.com/)

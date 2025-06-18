@@ -34,21 +34,21 @@ Content-Type: application/json
 ### INSERIR CATEGORIA COM TOKEN VALIDO (Happy)
 POST http://localhost:3000/categorias HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiQXJ0aHVyIE1hbmFnZXIiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc1MDE3NDgwMywiZXhwIjoxNzUwMTc4NDAzfQ.d97iPQagzkNZLe78UmhTUBOOMae-4DsQNM5bxRZtlf0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiQXJ0aHVyIE1hbmFnZXIiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc1MDI1NzE4OSwiZXhwIjoxNzUwMjYwNzg5fQ.6d56A0e1syDoqxzAEXcXgId8ymmr6o3HePtSUwNylF0
 
 {
-  "nome": "categoria1"
+  "nome": "Frutas"
 }
 
 ### INSERIR PRODUTO COM TOKEN VALIDO (Happy)
 POST http://localhost:3000/produtos HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiQXJ0aHVyIE1hbmFnZXIiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc1MDE3NDgwMywiZXhwIjoxNzUwMTc4NDAzfQ.d97iPQagzkNZLe78UmhTUBOOMae-4DsQNM5bxRZtlf0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsIm5vbWVVc3VhcmlvIjoiQXJ0aHVyIE1hbmFnZXIiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTc1MDI1NzE4OSwiZXhwIjoxNzUwMjYwNzg5fQ.6d56A0e1syDoqxzAEXcXgId8ymmr6o3HePtSUwNylF0
 
 {
-  "nome": "Produto 101",
-  "preco": 7.78,
-  "emailEmpresa": "mail@mail.com",
+  "nome": "Banana",
+  "preco": 5.99,
+  "emailEmpresa": "vendedoraDeBananas@gmail.com",
   "dataValidade": "2025-06-14",
   "categoriaId": 1
 }
